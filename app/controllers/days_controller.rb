@@ -1,5 +1,6 @@
 class DaysController < ActionController::Base
     def current
-        @answer = 5
+
+        @answer = TaskInputFetcher.new.call
     end
 end
