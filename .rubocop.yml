@@ -1,0 +1,20 @@
+require:
+  - 'rubocop-rspec'
+  - 'rubocop-rails'
+  - 'rubocop-rspec_rails'
+AllCops:
+  NewCops: enable
+  Exclude: 
+    - 'app/services/secrets.rb'
+    - 'config/environments/production.rb'
+    - 'bin/*'
+    - 'db/queue_schema.rb'
+    - 'Gemfile'
+
+Style/FrozenStringLiteralComment:
+    Enabled: false
+
+Style/Documentation:
+    Enabled: false
+Rails/ApplicationController:
+    Enabled: false

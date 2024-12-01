@@ -7,4 +7,3 @@ class DaysController < ActionController::Base
     @answer = Day1.new.call
   end
 end
-
