@@ -4,6 +4,8 @@ class DaysController < ActionController::Base
   end
 
   def day1
-    @answer = Day1.new.call
+    day1 = Day1.new
+    @answer = day1.part1
+    @answer2 = day1.part2
   end
 end
