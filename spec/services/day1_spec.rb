@@ -15,7 +15,7 @@ RSpec.describe Day1 do
   end
 
   before do
-    allow(task_input_fetcher_double).to receive(:call).with(1).and_return(example)
+    allow(task_input_fetcher_double).to receive(:call).and_return(example)
   end
 
   it 'calculates part 2' do
