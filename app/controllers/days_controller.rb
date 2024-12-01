@@ -1,6 +1,10 @@
 class DaysController < ActionController::Base
-    def current
+  def current
+    day1
+  end
 
-        @answer = TaskInputFetcher.new.call
-    end
+  def day1
+    @answer = Day1.new.call
+  end
 end
+
