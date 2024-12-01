@@ -2,6 +2,19 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Advent Of Code 2024" %></title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #11999b;
+        color: white;
+        font-size: 30px;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <%= @answer %>
