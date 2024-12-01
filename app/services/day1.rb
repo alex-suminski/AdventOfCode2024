@@ -5,21 +5,30 @@ class Day1
     @input = task_input_fetcher.call(1)
   end
 
-  def part1
-    input
-      .map { |line| line.split.map(&:to_i) }
-      .transpose
-      .map(&:sort)
-      .transpose
-      .map { |args| (args.first - args.last).abs }
-      .sum
+  def part2
+    numbers = '1|one|2|two|3|three|4|four|5|five|6|six|7|seven|8|eight|9|nine'
+    regex = Regexp.new numbers
+    regex_reversed = Regexp.new numbers.reverse
+
+    input.sum do |line|
+      first = line[regex]
+      last = line.reverse[regex_reversed].reverse
+      (to_digits(first) + to_digits(last)).to_i
+    end
   end
 
-  def part2
-    list1, list2 = input
-                   .map { |line| line.split.map(&:to_i) }
-                   .transpose
+  private
 
-    list1.map { |el| el * list2.count(el) }.sum
+  def to_digits(word)
+    { 'one' => '1',
+      'two' => '2',
+      'three' => '3',
+      'four' => '4',
+      'five' => '5',
+      'six' => '6',
+      'seven' => '7',
+      'eight' => '8',
+      'nine' => '9' }
+      .fetch(word, word)
   end
 end
