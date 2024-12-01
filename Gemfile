@@ -34,10 +34,12 @@ gem 'httparty'
 
 group :development, :test do
   gem 'debug'
+  gem 'rspec-rails', '~> 7.0.0'
 end
 
 group :development do
 end
 
 group :test do
+  gem 'rspec'
 end
