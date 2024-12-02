@@ -1,22 +1,23 @@
 class DaysController < ActionController::Base
-  CALENDAR = [0, Day1.new, Day2.new].freeze
   CURRENT_DAY = 2
 
   def current
-    day_solver = CALENDAR[CURRENT_DAY]
+    day_solver = Object.const_get("Day#{CURRENT_DAY}").new
     @answer = day_solver.part1
     @answer2 = day_solver.part2
-    @response1 = params[:response1]
-    @response2 = params[:response2]
+    @congrats_msg = params[:congrats_msg]
   end
 
   def post1
-    redirect_to controller: 'days', action: 'current',
-                response1: TaskAnswerChecker.new(CURRENT_DAY).call(1, params[:answer])
+    post(1)
   end
 
   def post2
+    post(2)
+  end
+
+  def post(part)
     redirect_to controller: 'days', action: 'current',
-                response2: TaskAnswerChecker.new(CURRENT_DAY).call(2, params[:answer])
+                congrats_msg: TaskAnswerChecker.new(CURRENT_DAY).call(part, params[:answer])
   end
 end

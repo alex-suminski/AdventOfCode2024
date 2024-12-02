@@ -14,7 +14,7 @@ class TaskAnswerChecker
   end
 
   def select_response(text)
-    if match = text.match(/(?<=<article><p>)(.*?)(?=<a href=)/)
+    if (match = text.match(/(?<=<article><p>)(.*?)(?=<a href=)/))
       match[0].strip
     else
       'No match found.'

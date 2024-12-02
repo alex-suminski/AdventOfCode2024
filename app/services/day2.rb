@@ -12,10 +12,9 @@ class Day2
   def part2
     input.select do |line|
       line = line.split.map(&:to_i)
-      # debugger
       valid?(line) ||
         (0..(line.size - 1)).any? do |i|
-          line_without = line[0, i].concat(line[i + 1..-1])
+          line_without = line[0, i].concat(line[i + 1..])
           valid?(line_without)
         end
     end.count
@@ -26,7 +25,7 @@ class Day2
     decreasing = true
     diff = true
     line.each_cons(2) do |x, y|
-      # break unless increasing || decreasing
+      break unless increasing || decreasing
 
       increasing = false if x >= y
       decreasing = false if x <= y

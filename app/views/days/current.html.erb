@@ -13,31 +13,30 @@
         color: white;
         font-size: 40px;
         text-align: center;
-        flex-direction: column; /* Stack elements vertically */
+        flex-direction: column; 
       }
       .answer-container {
-        display: flex; /* Use flexbox for alignment */
-        align-items: center; /* Center items vertically */
-        /* margin-bottom: 20px; Space between answer and response */
+        display: flex; 
+        align-items: center; 
+        margin-bottom: 20px; 
       }
       .button {
-        background-color: #6a0dad; /* Purple color */
+        background-color: #6a0dad; 
         color: white;
         border: none;
         border-radius: 5px;
-        padding: 8px 15px; /* Add padding for better appearance */
-        font-size: 25px; /* Adjust font size */
-        cursor: pointer; /* Pointer cursor on hover */
-        margin-left: 20px; /* Space between answer and button */
-        transition: background-color 0.3s; /* Smooth transition for hover */
+        padding: 8px 15px; 
+        font-size: 25px;
+        cursor: pointer; 
+        margin-left: 20px; /
+        transition: background-color 0.3s;
       }
       .button:hover {
-        background-color: #5b0c9e; /* Darker purple on hover */
+        background-color: #5b0c9e; 
       }
       .response {
-        font-size: 30px; /* Adjust font size for response */
-        margin-top: 10px; /* Space above response */
-        margin-bottom: 70px; /* Space above response */
+        font-size: 30px; 
+        margin-top: 30px; 
       }
     </style>
   </head>
@@ -46,15 +45,12 @@
       <span><%= @answer %></span>
       <%= button_to 'Post', { controller: "days", action: "post1", answer: @answer }, { method: :post, class: 'button' } %>
     </div>
-    <div class="response">
-      <%= @response1 || "Not solved yet." %>
-    </div>
     <div class="answer-container">
       <span><%= @answer2 %></span>
       <%= button_to 'Post', { controller: "days", action: "post2", answer: @answer2 }, { method: :post, class: 'button' } %>
     </div>
     <div class="response">
-      <%= @response2 || "Not solved yet." %>
+      <%= @congrats_msg || "Fingers Crossed!" %>
     </div>
   </body>
 </html>

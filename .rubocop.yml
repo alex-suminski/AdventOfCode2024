@@ -39,4 +39,8 @@ Lint/UselessAssignment:
     Enabled: false
 Lint/EmptyConditionalBody:
     Enabled: false
+Metrics/ClassLength:
+    Enabled: false
+Naming/MethodParameterName:
+    Enabled: false
 
