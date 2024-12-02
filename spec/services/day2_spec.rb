@@ -22,6 +22,6 @@ RSpec.describe Day2 do
   end
 
   it 'calculates part 2' do
-    expect(day.part2).to eq 0
+    expect(day.part2).to eq 4
   end
 end
