@@ -1,4 +1,4 @@
-class Day2
+class Day2FuckThisImGoingBurteForce
   attr_reader :input
 
   def initialize(task_input_fetcher: TaskInputFetcher.new)
