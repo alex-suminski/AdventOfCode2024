@@ -18,6 +18,10 @@ class Day2
     decreasing = true
     diff = true
     line.split.map(&:to_i).each_cons(2) do |x, y|
+      break unless increasing || decreasing
+
+      # break unless diff
+
       increasing = false if x >= y
       decreasing = false if x <= y
       diff = false if (x - y).abs > 3
