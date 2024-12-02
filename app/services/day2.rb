@@ -6,10 +6,29 @@ class Day2
   end
 
   def part1
-    input
+    input.select {|line| valid?(line)}.count
   end
 
   def part2
-    input
+    # input
+  end
+
+  def valid?(line)
+  increasing = true
+  decreasing = true
+  diff = true
+    line.split.map(&:to_i).each_cons(2) {|x,y|
+    
+    if x >= y
+      increasing = false 
+    end
+    if  x <= y
+      decreasing = false
+    end
+    if (x-y).abs > 3
+      diff = false
+    end
+  }
+  (increasing || decreasing) & diff
   end
 end

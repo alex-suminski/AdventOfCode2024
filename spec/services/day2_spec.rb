@@ -5,7 +5,12 @@ RSpec.describe Day2 do
 
   let(:task_input_fetcher_double) { instance_double(TaskInputFetcher) }
   let(:example) do
-    ''.split("\n")
+    '7 6 4 2 1
+1 2 7 8 9
+9 7 6 2 1
+1 3 2 4 5
+8 6 4 4 1
+1 3 6 7 9'.split("\n")
   end
 
   before do
@@ -13,7 +18,7 @@ RSpec.describe Day2 do
   end
 
   it 'calculates part 1' do
-    expect(day.part1).to eq 0
+    expect(day.part1).to eq 2
   end
 
   it 'calculates part 2' do

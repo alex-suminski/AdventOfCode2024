@@ -10,7 +10,7 @@ class DaysController < ActionController::Base
   end
 
   def day2
-    day = Day1.new
+    day = Day2.new
     @answer = day.part1
     @answer2 = day.part2
   end
