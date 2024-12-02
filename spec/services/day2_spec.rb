@@ -24,4 +24,38 @@ RSpec.describe Day2 do
   it 'calculates part 2' do
     expect(day.part2).to eq 4
   end
+
+  describe 'no removing' do
+    it 'calculates part 2 increasing' do
+      allow(task_input_fetcher_double).to receive(:call).and_return(['1 3 6 7 9'])
+      expect(day.part2).to eq 1
+    end
+
+    it 'calculates part 2 decresing' do
+      allow(task_input_fetcher_double).to receive(:call).and_return(['7 6 4 2 1'])
+      expect(day.part2).to eq 1
+    end
+  end
+
+  describe 'removing' do
+    it 'calculates part 2 increasing' do
+      allow(task_input_fetcher_double).to receive(:call).and_return(['1 3 2 4 5'])
+      expect(day.part2).to eq 1
+    end
+
+    it 'calculates part 2 decresing' do
+      allow(task_input_fetcher_double).to receive(:call).and_return(['8 6 4 4 1'])
+      expect(day.part2).to eq 1
+    end
+  end
+
+  it 'finds wrong' do
+    allow(task_input_fetcher_double).to receive(:call).and_return(['1 2 7 8 9'])
+    expect(day.part2).to eq 0
+  end
+
+  it 'finds wrongs' do
+    allow(task_input_fetcher_double).to receive(:call).and_return(['9 7 6 2 1'])
+    expect(day.part2).to eq 0
+  end
 end
