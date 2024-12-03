@@ -1,6 +1,8 @@
 class TaskAnswerChecker
   attr_reader :day
 
+  MAIN = %r{(?<=<main>\n<article><p>)(.*?)(?=</a></p></article>\n</main>)}
+
   def initialize(day)
     @day = day
   end
@@ -14,7 +16,7 @@ class TaskAnswerChecker
   end
 
   def select_response(text)
-    if (match = text.match(/(?<=<article><p>)(.*?)(?=<a href=)/))
+    if (match = text.match(MAIN))
       match[0].strip
     else
       'No match found.'
