@@ -9,7 +9,8 @@ RSpec.describe Day3 do
 xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))'.split("\n")
   end
   let(:example2) do
-    "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+    "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))don't()
+xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))undo()?mul(8,5))".split("\n")
   end
 
   it 'calculates part 1' do
@@ -19,6 +20,6 @@ xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))'.split("
 
   it 'calculates part 2' do
     allow(task_input_fetcher_double).to receive(:call).and_return(example2)
-    expect(day.part2).to eq 0
+    expect(day.part2).to eq 48 + 40 + 40
   end
 end
