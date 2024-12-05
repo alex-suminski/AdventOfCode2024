@@ -43,4 +43,5 @@ Metrics/ClassLength:
     Enabled: false
 Naming/MethodParameterName:
     Enabled: false
-
+Style:
+    Enabled: false
