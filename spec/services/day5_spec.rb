@@ -40,10 +40,10 @@ RSpec.describe Day5 do
   end
 
   it 'calculates part 1' do
-    expect(day.part1).to eq 0
+    expect(day.part1).to eq 143
   end
 
-  xit 'calculates part 2' do
-    expect(day.part2).to eq 0
+  it 'calculates part 2' do
+    expect(day.part2).to eq 123
   end
 end

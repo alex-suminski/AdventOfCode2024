@@ -6,7 +6,6 @@ class Day5
   end
 
   def part1
-    input
     ordering_raw, programs_raw = input.split("")
     ordering = ordering_raw.map { |rule| rule.split('|').map(&:to_i) }.group_by(&:shift).transform_values(&:flatten)
     programs = programs_raw.map { |program| program.split(',').map(&:to_i) }
@@ -24,7 +23,24 @@ class Day5
   end
 
   def part2
-    # input
+    ordering_raw, programs_raw = input.split("")
+    ordering = ordering_raw.map { |rule| rule.split('|').map(&:to_i) }.group_by(&:shift).transform_values(&:flatten)
+    programs = programs_raw.map { |program| program.split(',').map(&:to_i) }
+    programs.sum { |program|
+      all_good = true
+      program.each_with_index { |page, i|
+        if shit?(page, i, program, ordering)
+          program = sort_shit(page, i, program, ordering)
+          all_good = false
+        end
+      }
+      if all_good
+        0
+      else
+        # program_fixed = sort_shit(program, ordering)
+        program[(program.size - 1) / 2]
+      end
+    }
   end
 
   def shit?(page, i, program, ordering)
@@ -33,5 +49,11 @@ class Day5
     else
       false
     end
+  end
+
+  def sort_shit(page, i, program, ordering)
+    xx = ordering[page]
+    remove, leave = program[0..i - 1].partition { |el| xx.include?(el) }
+    leave + [page] + remove + program[(i + 1)..]
   end
 end
