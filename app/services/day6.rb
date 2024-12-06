@@ -22,7 +22,7 @@ class Day6
     size_x = input.first.length
     obstacles, guard = find_obstacles(input)
     visited = [Spot.new(y: guard.y, x: guard.x)]
-    (0..100000).each { |_|
+    (0..1000).each { |_|
       if guard.direction == 1
         hit = hit_up(guard, obstacles)
         unless hit
@@ -100,7 +100,7 @@ class Day6
     visited = [Spot.new(y: guard.y, x: guard.x)]
     spot_hits = []
     bariers = []
-    (0..100000).each { |_|
+    (0..1000).each { |_|
       if guard.direction == 1
         hit = hit_up(guard, obstacles)
         unless hit
@@ -255,8 +255,6 @@ class Day6
     (0..100).each { |_|
       if guard.direction == 1
         hit = hit_up(guard, obstacles)
-        # puts hit
-        # puts guard.direction
         unless hit
           loop = false
           break
@@ -270,8 +268,6 @@ class Day6
         guard.direction += 1
       elsif guard.direction == 2
         hit = hit_right(guard, obstacles)
-        # puts hit
-        # puts guard.direction
         unless hit
           loop = false
           break
@@ -286,8 +282,6 @@ class Day6
         guard.direction += 1
       elsif guard.direction == 3
         hit = hit_down(guard, obstacles)
-        # puts hit
-        # puts guard.direction
         unless hit
           loop = false
           break
@@ -302,8 +296,6 @@ class Day6
         guard.direction += 1
       elsif guard.direction == 4
         hit = hit_left(guard, obstacles)
-        # puts hit
-        # puts guard.direction
         unless hit
           loop = false
           break
