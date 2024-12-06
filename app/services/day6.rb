@@ -20,9 +20,9 @@ class Day6
   def part1
     size_y = input.length
     size_x = input.first.length
-    guard, obstacles = find_obstacles(input)
+    obstacles, guard = find_obstacles(input)
     visited = [Spot.new(y: guard.y, x: guard.x)]
-    (0..1000).each { |_|
+    (0..100000).each { |_|
       if guard.direction == 1
         hit = hit_up(guard, obstacles)
         unless hit
@@ -69,34 +69,31 @@ class Day6
   end
 
   def hit_up(guard, obstacles)
-    obstacles.sort_by { |obs| obs.y }.reverse.select { |obst|
-      # obstacles.select { |obst|
+    obstacles.select { |obst|
       obst.x == guard.x && obst.y < guard.y
-    }.last
+    }.sort_by { |obs| obs.y }.last
   end
 
   def hit_right(guard, obstacles)
-    obstacles.sort_by { |obs| obs.x }.select { |obst|
-      # obstacles.select { |obst|
+    obstacles.select { |obst|
       obst.x > guard.x && obst.y == guard.y
-    }.first
+    }.sort_by { |obs| obs.x }.first
   end
 
   def hit_down(guard, obstacles)
-    obstacles.sort_by { |obs| obs.y }.select { |obst|
+    obstacles.select { |obst|
       obst.x == guard.x && obst.y > guard.y
-    }.first
+    }.sort_by { |obs| obs.y }.first
   end
 
   def hit_left(guard, obstacles)
-    # obstacles.select { |obst|
-    obstacles.sort_by { |obs| -(obs.x) }.reverse.select { |obst|
+    obstacles.select { |obst|
       obst.x < guard.x && obst.y == guard.y
-    }.last
+    }.sort_by { |obs| obs.x }.last
   end
 
   def part2
-    guard, obstacles = find_obstacles(input)
+    obstacles, guard = find_obstacles(input)
 
     size_y = input.length
     size_x = input.first.length
@@ -248,7 +245,7 @@ class Day6
         end
       }
     }
-    [guard, obstacles]
+    [obstacles, guard]
   end
 
   def is_loop?(guard, obstacles)
