@@ -22,7 +22,7 @@ class Day6
     size_x = input.first.length
     obstacles, guard = find_obstacles(input)
     visited = [Spot.new(y: guard.y, x: guard.x)]
-    (0..1000).each { |_|
+    (0..1000).each { |i|
       if guard.direction == 1
         hit = hit_up(guard, obstacles)
         unless hit
@@ -100,19 +100,19 @@ class Day6
     visited = [Spot.new(y: guard.y, x: guard.x)]
     spot_hits = []
     bariers = []
-    (0..1000).each { |_|
+    (0..1000).each { |i|
       if guard.direction == 1
         hit = hit_up(guard, obstacles)
         unless hit
           visited.concat((0..guard.y - 1).map { |y| Spot.new(x: guard.x, y: y) })
 
           new_visited = (0..guard.y).map { |y| Spot.new(x: guard.x, y: y) }
-          bariers.concat(would_hit?(new_visited, spot_hits, guard.direction, obstacles))
+          bariers.concat(would_hit?(new_visited, guard.direction, obstacles))
 
           break
         end
         new_visited = (hit.y + 1..guard.y).map { |y| Spot.new(x: guard.x, y: y) }
-        bariers.concat(would_hit?(new_visited, spot_hits, guard.direction, obstacles))
+        bariers.concat(would_hit?(new_visited, guard.direction, obstacles))
 
         spot_hits << SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
         visited.concat(new_visited)
@@ -124,11 +124,11 @@ class Day6
           visited.concat((guard.x + 1..size_x - 1).map { |x| Spot.new(x: x, y: guard.y) })
 
           new_visited = (guard.x + 1..size_x - 1).map { |x| Spot.new(x: x, y: guard.y) }
-          bariers.concat(would_hit?(new_visited, spot_hits, guard.direction, obstacles))
+          bariers.concat(would_hit?(new_visited, guard.direction, obstacles))
           break
         end
         new_visited = (guard.x + 1..hit.x - 1).map { |x| Spot.new(x: x, y: guard.y) }
-        bariers.concat(would_hit?(new_visited, spot_hits, guard.direction, obstacles))
+        bariers.concat(would_hit?(new_visited, guard.direction, obstacles))
         spot_hits << SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
 
         visited.concat((guard.x + 1..hit.x - 1).map { |x| Spot.new(x: x, y: guard.y) })
@@ -140,11 +140,11 @@ class Day6
           visited.concat((guard.y + 1..size_y - 1).map { |y| Spot.new(x: guard.x, y: y) })
 
           new_visited = (guard.y + 1..size_y - 1).map { |y| Spot.new(x: guard.x, y: y) }
-          bariers.concat(would_hit?(new_visited, spot_hits, guard.direction, obstacles))
+          bariers.concat(would_hit?(new_visited, guard.direction, obstacles))
           break
         end
         new_visited = (guard.y + 1..hit.y - 1).map { |y| Spot.new(x: guard.x, y: y) }
-        bariers.concat(would_hit?(new_visited, spot_hits, guard.direction, obstacles))
+        bariers.concat(would_hit?(new_visited, guard.direction, obstacles))
         spot_hits << SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
 
         visited.concat((guard.y + 1..hit.y - 1).map { |y| Spot.new(x: guard.x, y: y) })
@@ -156,11 +156,11 @@ class Day6
           visited.concat((0..guard.x - 1).map { |x| Spot.new(x: x, y: guard.y) })
 
           new_visited = (0..guard.x - 1).map { |x| Spot.new(x: x, y: guard.y) }
-          bariers.concat(would_hit?(new_visited, spot_hits, guard.direction, obstacles))
+          bariers.concat(would_hit?(new_visited, guard.direction, obstacles))
           break
         end
         new_visited = (hit.x + 1..guard.x - 1).map { |x| Spot.new(x: x, y: guard.y) }
-        bariers.concat(would_hit?(new_visited, spot_hits, guard.direction, obstacles))
+        bariers.concat(would_hit?(new_visited, guard.direction, obstacles))
 
         spot_hits << SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
         visited.concat(new_visited)
@@ -171,66 +171,124 @@ class Day6
     bariers.uniq.count
   end
 
-  def would_hit?(positions, hits, direction, obstacles)
+  def would_hit?(positions, direction, obstacles)
     bariers = []
     if direction == 4
       positions.select { |position|
         hit = hit_up(Guard.new(x: position.x, y: position.y, direction: 1), obstacles)
         next unless hit
 
-        # debugger
-
         new_barier = Spot.new(y: position.y, x: position.x - 1)
         if is_loop?(Guard.new(x: position.x, y: position.y, direction: 1), obstacles + [new_barier])
-          # puts new_barier
           bariers << new_barier
         end
       }
-    end
-    if direction == 1
+    elsif direction == 1
       positions.select { |position|
         hit = hit_right(Guard.new(x: position.x, y: position.y, direction: 2), obstacles)
         next unless hit
 
-        # debugger
-
         new_barier = Spot.new(y: position.y - 1, x: position.x)
         if is_loop?(Guard.new(x: position.x, y: position.y, direction: 2), obstacles + [new_barier])
-          # puts new_barier
           bariers << new_barier
         end
       }
-    end
-    if direction == 2
+    elsif direction == 2
       positions.select { |position|
         hit = hit_down(Guard.new(x: position.x, y: position.y, direction: 3), obstacles)
         next unless hit
 
-        # debugger
-
         new_barier = Spot.new(y: position.y, x: position.x + 1)
         if is_loop?(Guard.new(x: position.x, y: position.y, direction: 3), obstacles + [new_barier])
-          # puts new_barier
           bariers << new_barier
         end
       }
-    end
-    if direction == 3
+    elsif direction == 3
       positions.each { |position|
         hit = hit_left(Guard.new(x: position.x, y: position.y, direction: 4), obstacles)
         next unless hit
 
-        # debugger
-        # debugger
         new_barier = Spot.new(y: position.y + 1, x: position.x)
 
         if is_loop?(Guard.new(x: position.x, y: position.y, direction: 4), obstacles + [new_barier])
-          # puts new_barier
           bariers << new_barier
         end
       }
     end
     bariers
+  end
+
+  def is_loop?(guard, obstacles)
+    loop = true
+    hits = []
+
+    (0..200).each { |i|
+      if i > 199
+        puts i
+        puts "==============================="
+      end
+      if guard.direction == 1
+        hit = hit_up(guard, obstacles)
+        unless hit
+          loop = false
+          break
+        end
+        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
+        if hits.include?(new_hit)
+          break
+        end
+
+        hits << new_hit
+        guard.y = hit.y + 1
+        guard.direction += 1
+      elsif guard.direction == 2
+        hit = hit_right(guard, obstacles)
+        unless hit
+          loop = false
+          break
+        end
+        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
+        if hits.include?(new_hit)
+          break
+        end
+
+        hits << new_hit
+
+        guard.x = hit.x - 1
+        guard.direction += 1
+      elsif guard.direction == 3
+        hit = hit_down(guard, obstacles)
+        unless hit
+          loop = false
+          break
+        end
+        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
+        if hits.include?(new_hit)
+          break
+        end
+
+        hits << new_hit
+
+        guard.y = hit.y - 1
+        guard.direction += 1
+      elsif guard.direction == 4
+        hit = hit_left(guard, obstacles)
+        unless hit
+          loop = false
+          break
+        end
+        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
+        if hits.include?(new_hit)
+          break
+        end
+
+        hits << new_hit
+
+        guard.x = hit.x + 1
+        guard.direction = 1
+      end
+    }
+    loop
   end
 
   def find_obstacles(input)
@@ -246,70 +304,5 @@ class Day6
       }
     }
     [obstacles, guard]
-  end
-
-  def is_loop?(guard, obstacles)
-    loop = true
-    hits = []
-
-    (0..100).each { |_|
-      if guard.direction == 1
-        hit = hit_up(guard, obstacles)
-        unless hit
-          loop = false
-          break
-        end
-        if hits.include?(hit)
-          break
-        end
-
-        hits << SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
-        guard.y = hit.y + 1
-        guard.direction += 1
-      elsif guard.direction == 2
-        hit = hit_right(guard, obstacles)
-        unless hit
-          loop = false
-          break
-        end
-        if hits.include?(hit)
-          break
-        end
-
-        hits << SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
-
-        guard.x = hit.x - 1
-        guard.direction += 1
-      elsif guard.direction == 3
-        hit = hit_down(guard, obstacles)
-        unless hit
-          loop = false
-          break
-        end
-        if hits.include?(hit)
-          break
-        end
-
-        hits << SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
-
-        guard.y = hit.y - 1
-        guard.direction += 1
-      elsif guard.direction == 4
-        hit = hit_left(guard, obstacles)
-        unless hit
-          loop = false
-          break
-        end
-        if hits.include?(hit)
-          break
-        end
-
-        hits << SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
-
-        guard.x = hit.x + 1
-        guard.direction = 1
-      end
-    }
-    loop
   end
 end
