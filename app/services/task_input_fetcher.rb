@@ -4,7 +4,5 @@ class TaskInputFetcher
                             headers: { 'Cookie' => Secrets.session_cookie })
 
     response.body.split("\n")
-
-    # "".split("\n")
   end
 end
