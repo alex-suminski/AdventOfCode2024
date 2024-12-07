@@ -28,9 +28,9 @@ RSpec.describe Day7 do
     expect(day.part2).to eq 11387
   end
 
-  xcontext 'real' do
+  context 'real' do
     let(:example) do
-      '190: 10 19
+      '190: 10 19 19
   3267: 81 40 27
   83: 17 5
   156: 15 6
@@ -46,11 +46,11 @@ RSpec.describe Day7 do
     end
 
     it 'calculates part 1' do
-      expect(day.part1).to eq 3749
+      expect(day.part1).to eq 3559
     end
 
     it 'calculates part 2' do
-      expect(day.part2).to eq 11387
+      expect(day.part2).to eq 11197
     end
   end
 end

@@ -16,9 +16,11 @@ class Day7
       permutations = manatee(positions)
 
       yes = permutations.any? do |perm|
-        result = numbers.each_with_index.reduce(0) do |acc, ((v), i)|
+        head, *tail = numbers
+        result = tail.each_with_index.reduce(head) do |acc, ((v), i)|
           acc = acc.public_send(perm[i], v)
-          break acc if acc >= value
+          break acc if (acc == value) && (tail.size - 1 == i)
+          break acc if acc > value
 
           acc
         end
@@ -58,6 +60,7 @@ class Day7
         end
         result == value
       end
+      # debugger
 
       if yes
         value
@@ -76,7 +79,7 @@ class Day7
 
   def manatees(size)
     operators = ['+', '*', '||']
-    (0..size - 3).reduce(operators) do |acc, _|
+    (0..[0, size - 3].max).reduce(operators) do |acc, _|
       acc.product(operators).map(&:flatten)
     end
   end
