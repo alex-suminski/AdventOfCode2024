@@ -169,9 +169,9 @@ class Day6First
     }
     # debugger
     bariers_final = bariers.uniq - obstacles
-    bariers_really_final = doubt_check(bariers_final)
+    # bariers_really_final = doubt_check(bariers_final)
 
-    bariers_really_final.count
+    bariers_final
   end
 
   def doubt_check(bariers)
@@ -230,6 +230,7 @@ class Day6First
   end
 
   def is_loop?(guard, obstacles)
+    guard_tmp = Guard.new(x: guard.x, y: guard.y, direction: guard.direction)
     loop = true
     hits = []
 
@@ -238,65 +239,65 @@ class Day6First
         raise "dupa"
       end
 
-      if guard.direction == 1
-        hit = hit_up(guard, obstacles)
+      if guard_tmp.direction == 1
+        hit = hit_up(guard_tmp, obstacles)
         unless hit
           loop = false
           break
         end
-        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
+        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard_tmp.direction)
         if hits.include?(new_hit)
           break
         end
 
         hits << new_hit
-        guard.y = hit.y + 1
-        guard.direction += 1
-      elsif guard.direction == 2
-        hit = hit_right(guard, obstacles)
+        guard_tmp.y = hit.y + 1
+        guard_tmp.direction += 1
+      elsif guard_tmp.direction == 2
+        hit = hit_right(guard_tmp, obstacles)
         unless hit
           loop = false
           break
         end
-        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
-        if hits.include?(new_hit)
-          break
-        end
-
-        hits << new_hit
-
-        guard.x = hit.x - 1
-        guard.direction += 1
-      elsif guard.direction == 3
-        hit = hit_down(guard, obstacles)
-        unless hit
-          loop = false
-          break
-        end
-        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
+        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard_tmp.direction)
         if hits.include?(new_hit)
           break
         end
 
         hits << new_hit
 
-        guard.y = hit.y - 1
-        guard.direction += 1
-      elsif guard.direction == 4
-        hit = hit_left(guard, obstacles)
+        guard_tmp.x = hit.x - 1
+        guard_tmp.direction += 1
+      elsif guard_tmp.direction == 3
+        hit = hit_down(guard_tmp, obstacles)
         unless hit
           loop = false
           break
         end
-        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard.direction)
+        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard_tmp.direction)
         if hits.include?(new_hit)
           break
         end
 
         hits << new_hit
 
-        guard.x = hit.x + 1
-        guard.direction = 1
+        guard_tmp.y = hit.y - 1
+        guard_tmp.direction += 1
+      elsif guard_tmp.direction == 4
+        hit = hit_left(guard_tmp, obstacles)
+        unless hit
+          loop = false
+          break
+        end
+        new_hit = SpotHit.new(x: hit.x, y: hit.y, direction: guard_tmp.direction)
+        if hits.include?(new_hit)
+          break
+        end
+
+        hits << new_hit
+
+        guard_tmp.x = hit.x + 1
+        guard_tmp.direction = 1
       end
     }
     loop
