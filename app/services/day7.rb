@@ -6,84 +6,83 @@ class Day7
   end
 
   def part1
-    return "solved"
-    input.sum { |line|
-      value_raw, numbers_raw = line.split(":")
+    # return "solved"
+    input.sum do |line|
+      value_raw, numbers_raw = line.split(':')
       puts value_raw
       value = value_raw.to_i
       numbers = numbers_raw.split.map(&:to_i)
       positions = numbers.size
       permutations = manatee(positions)
 
-      yes = permutations.any? { |perm|
-        result = numbers.each_with_index.reduce(0) { |acc, ((v), i)|
+      yes = permutations.any? do |perm|
+        result = numbers.each_with_index.reduce(0) do |acc, ((v), i)|
           acc = acc.public_send(perm[i], v)
-          if acc >= value
-            break acc
-          end
+          break acc if acc >= value
 
           acc
-        }
+        end
         result == value
-      }
+      end
       if yes
         value
       else
         0
       end
-    }
+    end
   end
 
   def part2
-    input.sum { |line|
-      value_raw, numbers_raw = line.split(":")
+    input.sum do |line|
+      value_raw, numbers_raw = line.split(':')
       puts value_raw
       value = value_raw.to_i
       numbers = numbers_raw.split.map(&:to_i)
       positions = numbers.size
       permutations = manatees(positions)
 
-      yes = permutations.any? { |perm|
-        result = numbers.each_with_index.reduce(0) { |acc, ((v), i)|
+      yes = permutations.any? do |perm|
+        head, *tail = numbers
+        result = tail.each_with_index.reduce(head) do |acc, ((v), i)|
           acc = if perm[i] == '||'
                   "#{acc}#{v}".to_i
                 else
                   acc.public_send(perm[i], v)
                 end
-          if acc >= value
+          if (acc == value) && (tail.last == v)
+            print 'wow'
+            print perm
+            # debugger
+            break acc
+          elsif acc > value
+            print 'shit'
             break acc
           end
 
           acc
-        }
+        end
         result == value
-      }
+      end
+
       if yes
         value
       else
         0
       end
-    }
+    end
   end
 
   def manatee(size)
     operators = ['+', '*']
-    (0..size - 2).reduce(operators) { |acc, _|
+    (0..size - 2).reduce(operators) do |acc, _|
       acc.product(operators).map(&:flatten)
-    }
+    end
   end
 
   def manatees(size)
     operators = ['+', '*', '||']
-    (0..size - 1).reduce(operators) { |acc, _|
+    (0..size - 3).reduce(operators) do |acc, _|
       acc.product(operators).map(&:flatten)
-    }
-  end
-
-  def manateess(size, operators)
-    count_operators = operators.count
-    (0..size - 1).reduce(operators) { |acc, _|
-      acc.product(operators).map(&:flatten)
-    }
+    end
   end
 end
