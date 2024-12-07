@@ -35,7 +35,6 @@ class Day7
   def part2
     input.sum do |line|
       value_raw, numbers_raw = line.split(':')
-      puts value_raw
       value = value_raw.to_i
       numbers = numbers_raw.split.map(&:to_i)
       positions = numbers.size
@@ -49,13 +48,9 @@ class Day7
                 else
                   acc.public_send(perm[i], v)
                 end
-          if (acc == value) && (tail.last == v)
-            print 'wow'
-            print perm
-            # debugger
+          if (acc == value) && (tail.size - 1 == i)
             break acc
           elsif acc > value
-            print 'shit'
             break acc
           end
 

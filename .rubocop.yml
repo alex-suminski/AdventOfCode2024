@@ -43,9 +43,13 @@ Metrics/ClassLength:
     Enabled: false
 Naming/MethodParameterName:
     Enabled: false
-# Style:
-#     Enabled: false
+Style:
+    Enabled: false
+Lint:
+    Enabled: false
 Metrics/BlockLength:
     Enabled: false
 
+Style/BlockDelimiters:
+    Enabled: true
 
