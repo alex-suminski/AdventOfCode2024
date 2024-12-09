@@ -6,7 +6,6 @@ class Day7
   end
 
   def part1
-    # return "solved"
     input.sum do |line|
       value_raw, numbers_raw = line.split(':')
       puts value_raw
@@ -60,7 +59,6 @@ class Day7
         end
         result == value
       end
-      # debugger
 
       if yes
         value
