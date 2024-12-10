@@ -1,4 +1,4 @@
-class Day10
+class Day16
   attr_reader :input
 
   def initialize(task_input_fetcher: TaskInputFetcher.new)
