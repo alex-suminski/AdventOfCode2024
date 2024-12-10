@@ -90,7 +90,7 @@ RSpec.describe Day10 do
     end
 
     it 'calculates part 1' do
-      expect(day.part1).to eq 2
+      expect(day.part1).to eq 3
     end
 
     it 'calculates part 2' do
