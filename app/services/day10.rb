@@ -24,8 +24,9 @@ class Day10
   end
 
   def part2
-    input
-    0
+    topography[0].map do |location|
+      step_up2(location, 0, 0)
+    end.flatten.sum
   end
 
   def find_neigbours(location)
@@ -45,7 +46,22 @@ class Day10
       neighbours.intersection(topography[next_level]).map do |next_location|
         step_up(next_location, next_level)
       end
+    end
+  end
 
+  def step_up2(location, level, score)
+    if level == 9
+      return score + 1
+    else
+      next_level = level + 1
+      neighbours = find_neigbours(location)
+
+      match = neighbours.intersection(topography[next_level])
+      return 0 if match.blank?
+
+      match.map do |next_location|
+        step_up2(next_location, next_level, score)
+      end
     end
   end
 end

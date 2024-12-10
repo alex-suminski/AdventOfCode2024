@@ -5,6 +5,10 @@ RSpec.describe Day10 do
 
   let(:task_input_fetcher_double) { instance_double(TaskInputFetcher) }
 
+  before do
+    allow(task_input_fetcher_double).to receive(:call).and_return(example)
+  end
+
   context '1' do
     let(:example) do
       '0123
@@ -13,16 +17,8 @@ RSpec.describe Day10 do
 9876'.split("\n")
     end
 
-    before do
-      allow(task_input_fetcher_double).to receive(:call).and_return(example)
-    end
-
     it 'calculates part 1' do
       expect(day.part1).to eq 1
-    end
-
-    it 'calculates part 2' do
-      expect(day.part2).to eq 0
     end
   end
 
@@ -37,16 +33,8 @@ RSpec.describe Day10 do
 9.....96'.split("\n")
     end
 
-    before do
-      allow(task_input_fetcher_double).to receive(:call).and_return(example)
-    end
-
     it 'calculates part 1' do
       expect(day.part1).to eq 2
-    end
-
-    it 'calculates part 2' do
-      expect(day.part2).to eq 0
     end
   end
 
@@ -61,16 +49,8 @@ RSpec.describe Day10 do
 987....'.split("\n")
     end
 
-    before do
-      allow(task_input_fetcher_double).to receive(:call).and_return(example)
-    end
-
     it 'calculates part 1' do
       expect(day.part1).to eq 4
-    end
-
-    it 'calculates part 2' do
-      expect(day.part2).to eq 0
     end
   end
 
@@ -85,16 +65,55 @@ RSpec.describe Day10 do
 .....01'.split("\n")
     end
 
-    before do
-      allow(task_input_fetcher_double).to receive(:call).and_return(example)
-    end
-
     it 'calculates part 1' do
       expect(day.part1).to eq 3
     end
+  end
+
+  context '6' do
+    let(:example) do
+      '.....0.
+..4321.
+..5..2.
+..6543.
+..7..4.
+..8765.
+..9....'.split("\n")
+    end
 
     it 'calculates part 2' do
-      expect(day.part2).to eq 0
+      expect(day.part2).to eq 3
+    end
+  end
+
+  context '7' do
+    let(:example) do
+      '..90..9
+...1.98
+...2..7
+6543456
+765.987
+876....
+987....1'.split("\n")
+    end
+
+    it 'calculates part 2' do
+      expect(day.part2).to eq 13
+    end
+  end
+
+  context '8' do
+    let(:example) do
+      '012345
+123456
+234567
+345678
+4.6789
+56789.'.split("\n")
+    end
+
+    it 'calculates part 2' do
+      expect(day.part2).to eq 227
     end
   end
 
@@ -110,16 +129,12 @@ RSpec.describe Day10 do
 10456732'.split("\n")
     end
 
-    before do
-      allow(task_input_fetcher_double).to receive(:call).and_return(example)
-    end
-
     it 'calculates part 1' do
       expect(day.part1).to eq 36
     end
 
     it 'calculates part 2' do
-      expect(day.part2).to eq 0
+      expect(day.part2).to eq 81
     end
   end
 end
