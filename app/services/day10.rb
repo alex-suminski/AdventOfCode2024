@@ -24,9 +24,12 @@ class Day10
   end
 
   def part2
+    # topography[0].map do |location|
+    #   step_up2(location, 0, 0)
+    # end.flatten.sum
     topography[0].map do |location|
-      step_up2(location, 0, 0)
-    end.flatten.sum
+      step_up(location, 0)
+    end.flatten.count
   end
 
   def find_neigbours(location)
