@@ -2,17 +2,21 @@ class Day9
   attr_reader :input
 
   def initialize(task_input_fetcher: TaskInputFetcher.new)
-    @input = task_input_fetcher.call(9)
+    @input = task_input_fetcher.call(9).first.chars.map(&:to_i)
   end
 
   def part1
     position = 0
-    input.first.chars.map.with_index do |el, i|
+    spaces = []
+    sum = 0
+    input.map.with_index do |location_length, i|
       if i.even?
-        el.to_i * position
+        id_number = i / 2
+        location_length * id_number
       else
-        0
+        spaces << position
       end
+      position += location_length
     end
   end
 
@@ -21,3 +25,8 @@ class Day9
     0
   end
 end
+
+# 0123456789
+# 0 1 2 3 4
+
+# (i-1)/2
