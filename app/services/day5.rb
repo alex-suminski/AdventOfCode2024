@@ -13,20 +13,20 @@ class Day5
     ordering_raw, programs_raw = input.split("")
     ordering = ordering_raw.map { |rule| rule.split('|').map(&:to_i) }.group_by(&:shift).transform_values(&:flatten)
     programs = programs_raw.map { |program| program.split(',').map(&:to_i) }
-    programs.sum { |program|
+    programs.sum do |program|
       all_good = true
-      program.each_with_index { |page, i|
+      program.each_with_index do |page, i|
         if shit?(page, i, program, ordering)
           program = sort_shit(page, i, program, ordering)
           all_good = false
         end
-      }
+      end
       if all_good
         0
       else
         program[(program.size - 1) / 2]
       end
-    }
+    end
   end
 
   def sum_middle
@@ -35,18 +35,18 @@ class Day5
                            .group_by(&:shift)
                            .transform_values(&:flatten)
 
-    programs_raw.sum { |program_raw|
+    programs_raw.sum do |program_raw|
       all_good = true
       program = program_raw.split(',').map(&:to_i)
-      program.each_with_index { |page, i|
+      program.each_with_index do |page, i|
         all_good = false if shit?(page, i, program, ordering)
-      }
+      end
       if all_good
         program[(program.size - 1) / 2]
       else
         0
       end
-    }
+    end
   end
 
   def shit?(page, i, program, ordering)

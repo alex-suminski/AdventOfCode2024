@@ -34,12 +34,6 @@ RSpec.describe Day6First do
       allow(task_input_fetcher_double).to receive(:call).and_return(example_big)
     end
 
-    it 'calculates part 2' do
-      str = Time.current
-      expect(day.part2).to eq 1670
-      Time.current - str
-    end
-
     let(:example_big) do
       '#.....#.........#.........................#...#....................#......#.......#...........#........#..........................
 ..................#......#..................................#..................#....#...............#.#....................#.....#
@@ -172,15 +166,17 @@ RSpec.describe Day6First do
 .............#........#.............#...........#..#..#.......................................................#......#............
 #...................#.#........................................#..................................#...#...........................'.split("\n")
     end
+
+    it 'calculates part 2' do
+      str = Time.current
+      expect(day.part2).to eq 1670
+      Time.current - str
+    end
   end
 
   context 'big' do
     before do
       allow(task_input_fetcher_double).to receive(:call).and_return(example_big)
-    end
-
-    it 'calculates part 1' do
-      expect(day.part1).to eq 4939
     end
 
     let(:example_big) do
@@ -314,6 +310,10 @@ RSpec.describe Day6First do
 .................#.........#..........................##............................#..#.....#....................................
 .....#....................................#......................................#.......................#...........#..#..#......
 .......#......#.........#.....#........#......#.................#...........#............#..................#....#...........#....'.split("\n")
+    end
+
+    it 'calculates part 1' do
+      expect(day.part1).to eq 4939
     end
   end
 end

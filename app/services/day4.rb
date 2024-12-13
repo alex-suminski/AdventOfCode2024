@@ -51,9 +51,9 @@ class Day4
     start = 3
     finish = height - start + height
 
-    (start..finish).sum { |i|
+    (start..finish).sum do |i|
       scan_diagonal(matrix, height, i)
-    }
+    end
   end
 
   def scan_diagonal(matrix, height, start)

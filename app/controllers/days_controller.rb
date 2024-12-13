@@ -1,5 +1,5 @@
 class DaysController < ActionController::Base
-  CURRENT_DAY = 11
+  CURRENT_DAY = 13
 
   def current
     day_solver = Object.const_get("Day#{CURRENT_DAY}").new

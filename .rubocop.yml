@@ -52,4 +52,7 @@ Metrics/BlockLength:
 
 Style/BlockDelimiters:
     Enabled: true
+Naming/VariableName:
+    Enabled: false
+
 
