@@ -1,0 +1,13 @@
+xP = (move_xA * xA) + (move_xB * xB)
+yP = (move_xA * yA) + (move_xB * yB)
+
+((yP - (move_xB * yB)) / yA) == move_xA
+
+xP == (((yP - (move_xB * yB)) / yA) * xA) + (move_xB * xB)
+
+xP == (((yP - (move_xB * yB)) * xA) / yA) + (move_xB * xB)
+
+xP == ((yP * xA - move_xB * yB * xA) / yA) + (move_xB * xB)
+xP == ((yP * xA * move_xB - move_xB**2 * yB * xA) / yA) + ((yP * xA * xB - move_xB * yB * xA * xB) / yA)
+
+xP * yA == ((yP * xA * move_xB - move_xB**2 * yB * xA)) + ((yP * xA * xB - move_xB * yB * xA * xB))
