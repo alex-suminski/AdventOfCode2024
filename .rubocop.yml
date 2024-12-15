@@ -54,5 +54,8 @@ Style/BlockDelimiters:
     Enabled: true
 Naming/VariableName:
     Enabled: false
+Layout/EmptyLinesAroundArguments:
+    Enabled: false
+
 
 
