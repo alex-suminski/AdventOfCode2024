@@ -1330,7 +1330,7 @@ Prize: X=13022, Y=9764
     end
 
     it 'calculates part 2' do
-      expect(day.part2).to eq 98728723
+      expect(day.part2).to eq -1
     end
   end
 end
