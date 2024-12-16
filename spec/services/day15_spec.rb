@@ -27,9 +27,9 @@ RSpec.describe Day15 do
       expect(day.part1).to eq 2028
     end
 
-    it 'calculates part 2' do
-      expect(day.part2).to eq 0
-    end
+    # it 'calculates part 2' do
+    #   expect(day.part2).to eq 0
+    # end
   end
 
   context 'when 2 example' do
@@ -66,7 +66,54 @@ v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^'.split("\
     end
 
     it 'calculates part 2' do
-      expect(day.part2).to eq 0
+      expect(day.part2).to eq 9021
+    end
+  end
+
+  context 'when 3 example' do
+    let(:example) do
+      '#######
+#...#.#
+#.....#
+#..OO@#
+#..O..#
+#.....#
+#######
+
+<vv<<^^<<^^'.split("\n")
+    end
+
+    before do
+      allow(task_input_fetcher_double).to receive(:call).and_return(example)
+    end
+
+    xit 'calculates part 2' do
+      expect(day.part2).to eq 618
+    end
+  end
+
+  xcontext 'when fix up example' do
+    let(:example) do
+      '####################
+##....[]....[]..[]##
+##............[]..##
+##..[][]....[]..[]##
+##...[].......[]..##
+##[]##....[]......##
+##[]......[]..[]..##
+##..[][]..@[].[][]##
+##........[]......##
+####################
+
+^^'.split("\n")
+    end
+
+    before do
+      allow(task_input_fetcher_double).to receive(:call).and_return(example)
+    end
+
+    it 'calculates part 2' do
+      expect(day.part2).to eq 9404
     end
   end
 end
