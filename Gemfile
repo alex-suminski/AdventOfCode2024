@@ -33,7 +33,7 @@ gem 'httparty'
 
 group :development, :test do
   gem 'debug'
-  gem 'rspec-rails', '~> 7.0.0'
+  gem 'rspec-rails', '~> 7.1.1'
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
